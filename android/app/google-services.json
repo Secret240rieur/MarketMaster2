@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "678890313388",
+    "firebase_url": "https://marketmaster-f0787-default-rtdb.firebaseio.com",
+    "project_id": "marketmaster-f0787",
+    "storage_bucket": "marketmaster-f0787.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678890313388:android:8f667de4cf075af3abf109",
+        "android_client_info": {
+          "package_name": "com.marketmaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678890313388-7o1ma7t7cnuv3lvcvijok93q9uck2q3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6V7kA7f-e447g2Ug1EmQwVMh8qvg15gE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678890313388-7o1ma7t7cnuv3lvcvijok93q9uck2q3n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "678890313388-kahjv44aohnqqo1r9417ed49j0l87k7j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jawsecrt22.myapp1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
