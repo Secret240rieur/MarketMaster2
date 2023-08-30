@@ -18,6 +18,7 @@ import {ChatButton} from './ChatButton';
 import {Contact} from './Contact';
 import {EditMode} from './EditMode';
 import React from 'react';
+import {MapPinIcon} from 'react-native-heroicons/outline';
 
 export const AdPage = ({route}: any) => {
   const [ad, setAd] = useState<Ad>();
@@ -73,11 +74,7 @@ export const AdPage = ({route}: any) => {
 
             <View style={tw`flex flex-row px-4 pb-4 border-b border-white`}>
               <View style={tw`flex flex-row gap-2`}>
-                {/* <SimpleLineIcons
-                  name="location-pin"
-                  size={24}
-                  color="#52525b"
-                /> */}
+                <MapPinIcon size={24} color="#52525b" />
                 <Text style={tw`text-lg text-white `}>{ad.city}</Text>
               </View>
 
@@ -102,7 +99,8 @@ export const AdPage = ({route}: any) => {
           <View
             style={tw`border-t border-zinc-900 bg-neutral-800 h-[10%] justify-center`}>
             <View style={tw`flex-row px-4 justify-between`}>
-              <View style={tw` justify-center border-r h-12 border-white w-30`}>
+              <View
+                style={tw` justify-center border-r h-12 border-white w-[55%]`}>
                 <Text style={tw`text-xl font-bold text-white`}>{ad.user}</Text>
               </View>
               <View style={tw`flex-row gap-1 h-12`}>

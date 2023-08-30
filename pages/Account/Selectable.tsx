@@ -2,6 +2,7 @@ import {Pressable, View, Text} from 'react-native';
 import tw from 'twrnc';
 import {Hstyle, Vstyle} from '../Style';
 import React from 'react';
+import {ChevronRightIcon} from 'react-native-heroicons/outline';
 
 type Props = {
   title: string;
@@ -22,12 +23,7 @@ export const Selectable = ({title, value, onPress, icon}: Props) => {
         style={tw`flex flex-row justify-between items-center gap-7`}
         onPress={onPress}>
         <Text style={tw`text-lg  text-gray-400`}>{value}</Text>
-        {/* <AntDesign
-          name="right"
-          size={20}
-          color="#3f3f46"
-          style={tw`self-center`}
-        /> */}
+        <ChevronRightIcon size={20} color="#3f3f46" style={tw`self-center`} />
       </Pressable>
     </View>
   );

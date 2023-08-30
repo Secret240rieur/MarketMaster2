@@ -18,7 +18,14 @@ import * as Yup from 'yup';
 import {UpdateUser} from './UpdateUser';
 import {ContinueButton} from '../Annonce/ContinueButton';
 import React from 'react';
-import {PhotoIcon, UserIcon} from 'react-native-heroicons/outline';
+import {
+  AtSymbolIcon,
+  FlagIcon,
+  LockClosedIcon,
+  PhoneIcon,
+  PhotoIcon,
+  UserIcon,
+} from 'react-native-heroicons/outline';
 
 export const ProfilPage = () => {
   const navigation = useNavigation<any>();
@@ -76,22 +83,8 @@ export const ProfilPage = () => {
                       editable={false}
                       title={'Email'}
                       value={values.email}
-                      // icon={
-                      // <MateriazlCommunityIcons
-                      //   name="email-outline"
-                      //   size={30}
-                      //   color="#3f3f46"
-                      // />
-
-                      // }
-                      // icon2={
-                      // <Ionicons
-                      //   name="lock-closed"
-                      //   size={20}
-                      //   color="#3f3f46"
-                      // />
-
-                      // }
+                      icon={<AtSymbolIcon size={30} color="#3f3f46" />}
+                      icon2={<LockClosedIcon size={30} color="#3f3f46" />}
                     />
                     <ProfilInput
                       keyboardType="numeric"
@@ -100,13 +93,7 @@ export const ProfilPage = () => {
                       value={values.phone}
                       errorMessage={<ErrorMessage name={'phone'} />}
                       placeholder={'06101010'}
-                      // icon={
-                      //   <MaterialCommunityIcons
-                      //     name="phone-outline"
-                      //     size={30}
-                      //     color="#3f3f46"
-                      //   />
-                      // }
+                      icon={<PhoneIcon size={30} color="#3f3f46" />}
                     />
 
                     <Selectable
@@ -117,13 +104,7 @@ export const ProfilPage = () => {
                           : values.city
                       }
                       onPress={() => navigation.push('Cities')}
-                      // icon={
-                      //   <MaterialCommunityIcons
-                      //     name="flag-outline"
-                      //     size={20}
-                      //     color="white"
-                      //   />
-                      // }
+                      icon={<FlagIcon size={20} color="white" />}
                     />
                     <Selectable
                       title={'Mot de passe'}

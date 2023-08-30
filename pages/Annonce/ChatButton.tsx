@@ -2,6 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import {Pressable, Text, View} from 'react-native';
 import tw from 'twrnc';
 import React from 'react';
+import {ChatBubbleLeftEllipsisIcon} from 'react-native-heroicons/outline';
 
 export const ChatButton = ({ad}: {ad: Ad}) => {
   const navigator = useNavigation<any>();
@@ -21,7 +22,7 @@ export const ChatButton = ({ad}: {ad: Ad}) => {
         })
       }>
       <View style={tw`self-center`}>
-        {/* <Ionicons name="chatbubble-ellipses-outline" size={22} color="white" /> */}
+        <ChatBubbleLeftEllipsisIcon size={22} color="white" />
       </View>
       <Text style={tw`text-sm text-white self-center font-bold`}>Chat</Text>
     </Pressable>

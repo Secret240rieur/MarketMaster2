@@ -3,6 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import {createTwoButtonAlert} from '../../src/Tools';
 import firestore from '@react-native-firebase/firestore';
 import React from 'react';
+import {TrashIcon} from 'react-native-heroicons/outline';
 
 export const DeleteButton = ({id}: {id: string}) => {
   const navigation = useNavigation<any>();
@@ -42,7 +43,7 @@ export const DeleteButton = ({id}: {id: string}) => {
           onpress: handleDeletePost,
         })
       }>
-      {/* <Ionicons name="ios-trash-outline" size={28} color="red" /> */}
+      <TrashIcon size={28} color="red" />
     </Pressable>
   );
 };

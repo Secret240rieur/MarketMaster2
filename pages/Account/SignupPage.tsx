@@ -19,6 +19,7 @@ import {RootState} from '../Store';
 import {useEffect, useRef, useState} from 'react';
 import {KeyboardAccessoryNavigation} from 'react-native-keyboard-accessory';
 import React from 'react';
+import {FlagIcon} from 'react-native-heroicons/outline';
 
 export const SignupPage = ({navigation}: any) => {
   const city = useSelector((state: RootState) => state.info.city);
@@ -277,14 +278,7 @@ export const SignupPage = ({navigation}: any) => {
                       title={'Ville'}
                       value={city}
                       onPress={() => navigation.push('Cities')}
-                      // icon={
-                      //   <MaterialCommunityIcons
-                      //     name="flag-outline"
-                      //     size={30}
-                      //     color="white"
-                      //   />
-                      // }
-                    ></Selectable>
+                      icon={<FlagIcon size={30} color="white" />}></Selectable>
                   </View>
                 </KeyboardAvoidingView>
                 <Text style={tw.style(Tstyle, `mt-4`)}>

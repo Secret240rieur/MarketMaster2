@@ -78,7 +78,7 @@ export const ChangePassword = () => {
               <ScrollView>
                 <KeyboardAvoidingView
                   behavior="position"
-                  keyboardVerticalOffset={Platform.OS === 'ios' ? 0o0 : 0o0}>
+                  keyboardVerticalOffset={Platform.OS === 'ios' ? -200 : -500}>
                   <View style={tw.style(`gap-10 mt-25 mb-10`)}>
                     <ProfilInput
                       autoFocus={true}

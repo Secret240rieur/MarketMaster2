@@ -1,6 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {Pressable} from 'react-native';
 import React from 'react';
+import {PencilSquareIcon} from 'react-native-heroicons/outline';
 
 export const EditButton = ({ad}: {ad: Ad}) => {
   const navigation = useNavigation<any>();
@@ -14,7 +15,7 @@ export const EditButton = ({ad}: {ad: Ad}) => {
           },
         })
       }>
-      {/* <FontAwesome name="pencil-square-o" size={31} color="black" /> */}
+      <PencilSquareIcon size={31} color="black" />
     </Pressable>
   );
 };
