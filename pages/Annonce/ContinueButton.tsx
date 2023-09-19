@@ -12,13 +12,13 @@ export const ContinueButton = ({
   text: string;
 }) => {
   return (
-    <View style={tw`flex justify-center bg-zinc-800 pt-4`}>
+    <View style={tw`flex justify-center pt-4`}>
       <Pressable
         onPress={handleSubmit}
         style={tw.style(
           `flex border rounded-lg w-[80%] h-12 self-center justify-center bg-zinc-400`,
           {
-            'bg-blue-600': isValid,
+            'bg-black': isValid,
           },
         )}>
         <Text style={tw`flex mx-auto text-xl font-bold text-white`}>

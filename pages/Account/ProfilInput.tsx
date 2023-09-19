@@ -33,13 +33,13 @@ export const ProfilInput = ({
       <Text style={tw.style(Hstyle)}>{title}</Text>
       <View
         style={tw.style(
-          `flex flex-row items-center border border-white rounded p-2 gap-2`,
-          {'bg-zinc-900': !editable},
+          `flex flex-row items-center border border-slate-300 rounded p-2 gap-2`,
+          {'bg-slate-300': !editable},
         )}>
         {icon}
         <TextInput
           autoFocus={autoFocus}
-          style={tw.style(`text-lg text-white pb-2 w-full`, {
+          style={tw.style(`text-lg text-black pb-2 w-full`, {
             'text-gray-400': !editable,
           })}
           placeholder={placeholder}

@@ -44,7 +44,7 @@ export const ConversationsListPage = () => {
   }, [refreshing]);
 
   return (
-    <View style={tw`flex-1 pt-10 px-4 bg-zinc-800 border`}>
+    <View style={tw`flex-1 pt-10 px-4 bg-slate-200 border`}>
       <Text style={tw.style(TitleStyle)}>Chat</Text>
       <View style={tw`h-5/6`}>
         <FlatList

@@ -22,6 +22,7 @@ import {getConversationId} from '../../src/Tools';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import uuid from 'react-native-uuid';
+import {CameraIcon} from 'react-native-heroicons/outline';
 
 export const ChatPage = ({route}: any) => {
   const [uploading, setUploading] = useState(false);
@@ -200,7 +201,7 @@ export const ChatPage = ({route}: any) => {
   }, [refreshing]);
 
   return (
-    <SafeAreaView style={tw`flex-1 bg-black`}>
+    <SafeAreaView style={tw`flex-1 bg-slate-200 justify-between`}>
       <Pressable
         style={tw`flex flex-row p-4 gap-2`}
         onPress={() =>
@@ -217,7 +218,7 @@ export const ChatPage = ({route}: any) => {
         />
         <Text style={tw.style(Hstyle, `w-3/4`)}>{route.params.title}</Text>
       </Pressable>
-      <View style={tw`h-3/4 bg-zinc-800 px-4`}>
+      <View style={tw`h-3/4 bg-slate-200 px-4`}>
         <FlatList
           data={data}
           renderItem={({item, index}) => (
@@ -241,7 +242,7 @@ export const ChatPage = ({route}: any) => {
         <View
           style={tw`flex-row justify-between px-4 h-15 border-t-2 border-[#3f3f46] bg-black`}>
           <Pressable style={tw` justify-center`} onPress={pickImage}>
-            {/* <Ionicons name="camera-outline" size={24} color="grey" /> */}
+            <CameraIcon size={24} color="grey" />
           </Pressable>
           <TextInput
             multiline

@@ -21,6 +21,7 @@ import React from 'react';
 import {
   AtSymbolIcon,
   FlagIcon,
+  HashtagIcon,
   LockClosedIcon,
   PhoneIcon,
   PhotoIcon,
@@ -59,7 +60,7 @@ export const ProfilPage = () => {
           validationSchema={validationSchema}>
           {({handleSubmit, isValid, handleChange, values}) => (
             <View>
-              <Text style={tw`text-2xl font-bold text-white self-center `}>
+              <Text style={tw`text-2xl font-bold text-black self-center `}>
                 Modifier mon profile
               </Text>
               <ScrollView>
@@ -104,7 +105,7 @@ export const ProfilPage = () => {
                           : values.city
                       }
                       onPress={() => navigation.push('Cities')}
-                      icon={<FlagIcon size={20} color="white" />}
+                      icon={<FlagIcon size={20} color="black" />}
                     />
                     <Selectable
                       title={'Mot de passe'}
@@ -117,6 +118,7 @@ export const ProfilPage = () => {
                           },
                         })
                       }
+                      icon={<HashtagIcon size={20} color="black" />}
                     />
 
                     <ContinueButton

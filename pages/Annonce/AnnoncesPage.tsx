@@ -138,7 +138,7 @@ export const AnnoncesPage = () => {
   }, [uid]);
 
   return (
-    <SafeAreaView style={tw.style('bg-zinc-800 w-full h-full ')}>
+    <SafeAreaView style={tw.style('w-full h-full pb-10 bg-slate-200')}>
       <ScrollView
         style={tw`flex-1 px-3 pt-10`}
         refreshControl={
@@ -163,7 +163,7 @@ export const AnnoncesPage = () => {
             onPress={() => {
               setOpen(true);
             }}>
-            <Text style={tw.style('text-2xl font-bold text-[#2563eb]')}>
+            <Text style={tw.style('text-2xl font-bold text-zinc-800')}>
               Filters
             </Text>
           </Pressable>

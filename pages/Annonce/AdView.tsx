@@ -25,8 +25,8 @@ export const AdView = ({fullWidth = false, image, title, price, id}: Props) => {
         style={tw.style('w-full h-48 rounded-t-2xl')}
       />
 
-      <View style={tw.style('flex p-4 bg-zinc-700 rounded-b-2xl')}>
-        <Text style={tw.style('text-xl font-bold text-white ')}>
+      <View style={tw.style('flex p-4 rounded-b-2xl border border-slate-300')}>
+        <Text style={tw.style('text-xl font-bold text-zinc-800 ')}>
           {price} DH
         </Text>
         <Text numberOfLines={1} style={tw.style('text-base text-gray-400 ')}>

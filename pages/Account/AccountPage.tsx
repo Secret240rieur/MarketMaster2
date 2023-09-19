@@ -90,8 +90,9 @@ export const AccountPage = () => {
   }, [index]);
 
   return (
-    <View style={tw`flex-1 bg-zinc-900`}>
-      <View style={tw`flex flex-col gap-7 h-55 w-full px-4 bg-zinc-800 pt-15 `}>
+    <View style={tw`flex-1 bg-slate-200`}>
+      <View
+        style={tw`flex flex-col gap-7 h-55 w-full px-4 bg-slate-200 pt-15 `}>
         <View style={tw`flex flex-row justify-between items-center`}>
           <Text>
             <UserCircleIcon color="white" size={80} />

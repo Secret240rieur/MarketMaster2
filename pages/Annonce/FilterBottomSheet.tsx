@@ -8,6 +8,7 @@ import {RootState} from '../Store';
 import {useNavigation} from '@react-navigation/native';
 import {resetFilter} from '../InfoSlice';
 import React from 'react';
+import {FunnelIcon, MapPinIcon} from 'react-native-heroicons/outline';
 
 export const FilterBottomSheet = ({
   open,
@@ -63,7 +64,7 @@ export const FilterBottomSheet = ({
               },
             })
           }
-          // icon={<MaterialIcons name="filter-list" size={30} color="white" />}
+          icon={<FunnelIcon size={30} color="white" />}
         />
         <Selectable
           title={'Ville'}
@@ -76,13 +77,14 @@ export const FilterBottomSheet = ({
               },
             })
           }
-          // icon={
-          //   <MaterialCommunityIcons
-          //     name="flag-outline"
-          //     size={30}
-          //     color="white"
-          //   />
-          // }
+          icon={
+            <MapPinIcon
+              //   <MaterialCommunityIcons
+              //     name="flag-outline"
+              size={30}
+              color="white"
+            />
+          }
         />
       </View>
     </BottomSheet>

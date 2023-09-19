@@ -11,6 +11,12 @@ import {reset} from '../InfoSlice';
 import {removeImagesFolder} from '../../src/Tools';
 import uuid from 'react-native-uuid';
 import React from 'react';
+import {
+  FlagIcon,
+  FunnelIcon,
+  InformationCircleIcon,
+  XMarkIcon,
+} from 'react-native-heroicons/outline';
 
 export const PublishPost1 = () => {
   const category = useSelector((state: RootState) => state.info.category);
@@ -23,7 +29,8 @@ export const PublishPost1 = () => {
 
   useEffect(() => {
     (async () => {
-      const UUID = uuid.v4().toString();
+      const UUID = uuid.v4().toString().toUpperCase();
+      console.log(UUID);
       setId(UUID);
     })();
   }, [category === 'Toutes les categories']);
@@ -50,10 +57,10 @@ export const PublishPost1 = () => {
             navigation.navigate('Home');
             removeImagesFolder(id);
           }}>
-          {/* <Entypo name="cross" size={30} color="white" /> */}
+          <XMarkIcon size={30} color="black" />
         </Pressable>
         <Text
-          style={tw`absolute self-center text-2xl font-bold text-white mb-6`}>
+          style={tw`absolute self-center text-2xl font-bold text-zinc-800 mb-6`}>
           Créer une annonce
         </Text>
       </View>
@@ -62,37 +69,27 @@ export const PublishPost1 = () => {
           title={'Catégories'}
           value={category}
           onPress={() => navigation.push('Categories')}
-          // icon={<MaterialIcons name="filter-list" size={30} color="white" />}
+          icon={<FunnelIcon size={30} color="black" />}
         />
         <Selectable
           title={'Ville'}
           value={city}
           onPress={() => navigation.push('Cities')}
-          // icon={
-          //   <MaterialCommunityIcons
-          //     name="flag-outline"
-          //     size={30}
-          //     color="white"
-          //   />
-          // }
+          icon={<FlagIcon size={30} color="black" />}
         />
         <Text style={tw.style(Hstyle, `mt-6`)}>Photos (8 maximum)</Text>
 
         <ImageField id={id} setIsEmpty={setIsEmpty} />
-        <View style={tw`flex flex-row gap-1 justify-center`}>
-          {/* <Ionicons
-            name="md-information-circle-outline"
-            size={24}
-            color="#9ca3af"
-          /> */}
-          <Text style={tw.style(Tstyle)}>
+        <View style={tw`flex flex-row gap-1 justify-center px-3`}>
+          <InformationCircleIcon size={24} color="#9ca3af" style={tw`mt-1`} />
+          <Text style={tw.style(Tstyle, `text-center`)}>
             Une annonce avec photos est consultée 10 fois plus qu‘une annonce
             sans photos
           </Text>
         </View>
       </ScrollView>
 
-      <View style={tw`flex justify-center bg-zinc-800 pt-4`}>
+      <View style={tw`flex justify-center bg-slate-200 pt-4`}>
         <Pressable
           disabled={disabled}
           onPress={() => {

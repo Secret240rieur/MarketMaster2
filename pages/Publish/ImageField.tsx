@@ -5,6 +5,8 @@ import {useDispatch} from 'react-redux';
 import {setImagesUrl} from '../InfoSlice';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import {CameraIcon} from 'react-native-heroicons/outline';
+import {MediaType, launchImageLibrary} from 'react-native-image-picker';
 
 export const ImageField = ({
   id,
@@ -18,7 +20,6 @@ export const ImageField = ({
   const [uploading, setUploading] = useState(false);
   const [images, setImages] = useState<string[]>(adImages ? adImages : []);
   const dispatch = useDispatch<any>();
-
   const url = `pictures/` + id + `/`;
 
   useEffect(() => {
@@ -69,6 +70,12 @@ export const ImageField = ({
   };
 
   const pickImage = async () => {
+    let options = {
+      includeBase64: true,
+      mediaType: 'photo' as MediaType,
+    };
+    const result = await launchImageLibrary(options);
+    // console.log(result);
     // let result = await ImagePicker.launchImageLibraryAsync({
     //   mediaTypes: ImagePicker.MediaTypeOptions.All,
     //   // We can specify whether we need only Images or Videos
@@ -77,12 +84,21 @@ export const ImageField = ({
     //   quality: 1,
     //   // 0 means compress for small size, 1 means compress for maximum quality
     // });
-    // if (!result.canceled) {
-    //   uploadImage(result.assets[0].uri);
-    // }
+    if (
+      !result.didCancel &&
+      result.assets &&
+      result.assets[0].uri &&
+      result.assets[0].fileName
+    ) {
+      const imageUri = result.assets[0].uri;
+      const image = result.assets[0].fileName;
+      console.log(id);
+      console.log(imageUri, image);
+      uploadImage(imageUri, image);
+    }
   };
 
-  const uploadImage = async (image: string) => {
+  const uploadImage = async (imageUri: string, image: string) => {
     const blob = await new Promise<Blob>((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.onload = function () {
@@ -92,12 +108,12 @@ export const ImageField = ({
         reject(new TypeError('Network request failed'));
       };
       xhr.responseType = 'blob';
-      xhr.open('GET', image, true);
+      xhr.open('GET', imageUri, true);
       xhr.send(null);
     });
     const ref = storage()
       .ref()
-      .child(url + image.split('/').pop());
+      .child(url + image);
     const snapshot = ref.put(blob);
 
     snapshot.on(
@@ -143,14 +159,7 @@ export const ImageField = ({
       <Pressable onPress={pickImage}>
         <View
           style={tw`flex w-27 h-27 justify-center border border-dashed border-black bg-white`}>
-          {/* {
-            <MaterialCommunityIcons
-              name="camera-plus"
-              size={60}
-              color="#52525b"
-              style={tw`self-center  `}
-            />
-          } */}
+          {<CameraIcon size={60} color="#52525b" style={tw`self-center  `} />}
         </View>
       </Pressable>
       {Array.from({length: 7 - images.length}, (_, index) => index + 1).map(

@@ -2,6 +2,7 @@ import {Pressable, Text, ScrollView} from 'react-native';
 import {BodyStyle, PressableStyle, TitleStyle} from '../Style';
 import tw from 'twrnc';
 import React from 'react';
+import {ChevronRightIcon} from 'react-native-heroicons/outline';
 
 type Props = {
   title: string;
@@ -18,13 +19,12 @@ export const List = ({title, list, onPress}: Props) => {
           key={i}
           onPress={() => onPress(value)}
           style={tw.style(PressableStyle)}>
-          <Text style={tw.style('text-lg  text-white mb-4')}>{value}</Text>
-          {/* <AntDesign
-            name="right"
+          <Text style={tw.style('text-lg  text-black mb-4')}>{value}</Text>
+          <ChevronRightIcon
             size={20}
             color="#3f3f46"
             style={tw`self-center `}
-          /> */}
+          />
         </Pressable>
       ))}
     </ScrollView>

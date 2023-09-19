@@ -46,7 +46,7 @@ export const AdPage = ({route}: any) => {
   }, [refreshing]);
 
   return (
-    <SafeAreaView style={tw`bg-zinc-800 flex-1`}>
+    <SafeAreaView style={tw`bg-slate-200 flex-1`}>
       {ad && (
         <View>
           <ScrollView
@@ -64,7 +64,7 @@ export const AdPage = ({route}: any) => {
               ;
             </Text>
             <View style={tw`flex flex-row p-4 justify-between`}>
-              <Text style={tw`text-lg w-[60%] font-bold text-white`}>
+              <Text style={tw`text-lg w-[60%] font-bold text-zinc-800`}>
                 {ad.title}
               </Text>
               <Text style={tw`text-lg font-bold text-blue-600 text-right`}>
@@ -75,11 +75,11 @@ export const AdPage = ({route}: any) => {
             <View style={tw`flex flex-row px-4 pb-4 border-b border-white`}>
               <View style={tw`flex flex-row gap-2`}>
                 <MapPinIcon size={24} color="#52525b" />
-                <Text style={tw`text-lg text-white `}>{ad.city}</Text>
+                <Text style={tw`text-lg text-zinc-800 `}>{ad.city}</Text>
               </View>
 
               <View style={tw` `}>
-                <Text style={tw`text-lg px-4 text-white `}>
+                <Text style={tw`text-lg px-4 text-zinc-800 `}>
                   {formatDistance(
                     new Date(ad?.date.toDate().toISOString()),
                     new Date(),
@@ -89,19 +89,22 @@ export const AdPage = ({route}: any) => {
               </View>
             </View>
             <View style={tw`mt-2 `}>
-              <Text style={tw`text-xl p-4  font-bold text-white`}>
+              <Text style={tw`text-xl p-4  font-bold text-zinc-800`}>
                 Description
               </Text>
-              <Text style={tw`text-lg px-4 text-white `}>{ad.description}</Text>
+              <Text style={tw`text-lg px-4 text-zinc-800 `}>
+                {ad.description}
+              </Text>
             </View>
           </ScrollView>
 
-          <View
-            style={tw`border-t border-zinc-900 bg-neutral-800 h-[10%] justify-center`}>
+          <View style={tw`border-t border-slate-300  h-[10%] justify-center`}>
             <View style={tw`flex-row px-4 justify-between`}>
               <View
                 style={tw` justify-center border-r h-12 border-white w-[55%]`}>
-                <Text style={tw`text-xl font-bold text-white`}>{ad.user}</Text>
+                <Text style={tw`text-xl font-bold text-zinc-800`}>
+                  {ad.user}
+                </Text>
               </View>
               <View style={tw`flex-row gap-1 h-12`}>
                 <Contact ad={ad} />

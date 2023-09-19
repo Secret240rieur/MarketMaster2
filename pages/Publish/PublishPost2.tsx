@@ -9,6 +9,7 @@ import * as Yup from 'yup';
 import {reset} from '../InfoSlice';
 import firestore from '@react-native-firebase/firestore';
 import React from 'react';
+import {XMarkIcon} from 'react-native-heroicons/outline';
 
 export const PublishPost2 = ({route}: any) => {
   const category = useSelector((state: RootState) => state.info.category);
@@ -19,6 +20,8 @@ export const PublishPost2 = ({route}: any) => {
   const dispatch = useDispatch();
   const id = route.params.id;
   const navigation = useNavigation<any>();
+
+  console.log(id);
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('title is required'),
@@ -72,7 +75,7 @@ export const PublishPost2 = ({route}: any) => {
                 navigation.navigate('PublishPost1');
                 navigation.navigate('Home');
               }}>
-              {/* <Entypo name="cross" size={30} color="white" /> */}
+              <XMarkIcon size={30} color="black" />
             </Pressable>
             <Text
               style={tw.style(
@@ -87,7 +90,7 @@ export const PublishPost2 = ({route}: any) => {
               onChangeText={handleChange('title')}
               onBlur={handleBlur('title')}
               value={values.title}
-              style={tw`mt-5 border border-white bg-zinc-500 h-12 rounded p-2`}
+              style={tw`mt-5 border border-slate-300 h-12 rounded p-2`}
             />
             <Text>
               <ErrorMessage name={'title'} />
@@ -97,7 +100,7 @@ export const PublishPost2 = ({route}: any) => {
               onChangeText={handleChange('price')}
               onBlur={handleBlur('price')}
               value={values.price.toString()}
-              style={tw`mt-5 border border-white bg-zinc-500 h-12 rounded p-2`}
+              style={tw`mt-5 border border-slate-300 h-12 rounded p-2`}
             />
             <Text>
               <ErrorMessage name={'price'} />
@@ -108,14 +111,16 @@ export const PublishPost2 = ({route}: any) => {
               onBlur={handleBlur('description')}
               value={values.description}
               multiline
-              style={tw`mt-5 border border-white bg-zinc-500 h-52 rounded p-2`}
+              style={tw.style(`mt-5 border border-slate-300 h-52 rounded p-2`, {
+                textAlignVertical: 'top',
+              })}
             />
             <Text>
               <ErrorMessage name={'description'} />
             </Text>
           </ScrollView>
 
-          <View style={tw`flex justify-center bg-zinc-800 pt-4`}>
+          <View style={tw`flex justify-center pt-4`}>
             <Pressable
               onPress={() => handleSubmit()}
               style={tw.style(

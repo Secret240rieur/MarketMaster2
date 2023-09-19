@@ -4,6 +4,7 @@ import moment from 'moment';
 import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 import React from 'react';
+import {ChevronRightIcon} from 'react-native-heroicons/outline';
 
 export const ConversationPreview = ({
   id,
@@ -29,7 +30,7 @@ export const ConversationPreview = ({
 
   return (
     <Pressable
-      style={tw`flex flex-row px-3 py-2 bg-zinc-900 rounded-5 justify-between gap-3 mt-3`}
+      style={tw`flex flex-row px-3 py-2 rounded-5 justify-between gap-3 mt-3`}
       onPress={() =>
         navigator.navigate({
           name: 'ChatPage',
@@ -48,25 +49,20 @@ export const ConversationPreview = ({
         style={tw`w-20 h-20 rounded-5 self-center`}
       />
       <View style={tw`flex-1 gap-0`}>
-        <Text numberOfLines={1} style={tw`text-white font-bold text-xl`}>
+        <Text numberOfLines={1} style={tw`text-black font-bold text-xl`}>
           {title.toUpperCase()}
         </Text>
-        <Text style={tw`text-white text-lg`}>{price} DH</Text>
-        <View style={tw` flex flex-row justify-between `}>
-          <Text numberOfLines={1} style={tw`text-gray-400 text-sm  w-3/4`}>
+        <Text style={tw`text-black text-lg`}>{price} DH</Text>
+        <View style={tw` flex flex-row justify-between`}>
+          <Text numberOfLines={1} style={tw`text-gray-400 text-sm`}>
             {message}
           </Text>
-          <Text style={tw`text-white text-lg`}>
+          <Text style={tw`text-black text-lg`}>
             {moment(date.toDate()).format('LT')}
           </Text>
         </View>
       </View>
-      {/* <AntDesign
-        name="right"
-        size={20}
-        color="#3f3f46"
-        style={tw`self-center `}
-      /> */}
+      <ChevronRightIcon size={20} color="#3f3f46" style={tw`self-center `} />
     </Pressable>
   );
 };

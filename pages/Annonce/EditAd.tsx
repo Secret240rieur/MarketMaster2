@@ -19,6 +19,7 @@ import {RootState} from '../Store';
 import {reset} from '../InfoSlice';
 import {ContinueButton} from './ContinueButton';
 import React from 'react';
+import {FlagIcon, FunnelIcon, XMarkIcon} from 'react-native-heroicons/outline';
 
 export const EditAd = ({route}: any) => {
   const categoryTmp = useSelector((state: RootState) => state.info.category);
@@ -91,7 +92,7 @@ export const EditAd = ({route}: any) => {
               onPress={() => {
                 navigation.navigate(navigate);
               }}>
-              {/* <Entypo name="cross" size={30} color="white" /> */}
+              <XMarkIcon size={30} color="white" />
             </Pressable>
             <Text
               style={tw.style(
@@ -140,21 +141,13 @@ export const EditAd = ({route}: any) => {
                 title={'Catégories'}
                 value={category}
                 onPress={() => navigation.push('Categories')}
-                // icon={
-                // <MaterialIcons name="filter-list" size={30} color="white" />
-                // }
+                icon={<FunnelIcon size={30} color="white" />}
               />
               <Selectable
                 title={'Ville'}
                 value={city}
                 onPress={() => navigation.push('Cities')}
-                // icon={
-                //   <MaterialCommunityIcons
-                //     name="flag-outline"
-                //     size={30}
-                //     color="white"
-                //   />
-                // }
+                icon={<FlagIcon size={30} color="white" />}
               />
               <View>
                 <Text style={tw.style(Hstyle)}>Photos (8 maximum)</Text>
