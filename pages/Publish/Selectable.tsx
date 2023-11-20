@@ -9,19 +9,28 @@ type Props = {
   value: string;
   onPress: () => void;
   icon?: any;
+  icnColor: string;
+  txtColor: string;
 };
 
-export const Selectable = ({title, value, onPress, icon}: Props) => {
+export const Selectable = ({
+  title,
+  value,
+  onPress,
+  icon,
+  icnColor,
+  txtColor,
+}: Props) => {
   return (
     <Pressable style={tw.style(PressableStyle)} onPress={onPress}>
       <View style={tw`flex flex-col gap-y-5 `}>
         <View style={tw.style(Vstyle)}>
           {icon}
-          <Text style={tw.style(Hstyle)}>{title}</Text>
+          <Text style={tw.style(Hstyle, txtColor)}>{title}</Text>
         </View>
-        <Text style={tw.style(Tstyle, `ml-10`)}>{value}</Text>
+        <Text style={tw.style(Tstyle, txtColor, `ml-10`)}>{value}</Text>
       </View>
-      {<ChevronRightIcon size={20} color="#3f3f46" style={tw`self-center `} />}
+      {<ChevronRightIcon size={20} color={icnColor} style={tw`self-center `} />}
     </Pressable>
   );
 };

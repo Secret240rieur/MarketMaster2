@@ -1,10 +1,14 @@
 import {ScrollView, Text, View} from 'react-native';
 import tw from 'twrnc';
-import {Tstyle} from '../../Style';
+import {Tstyle, TxtColor} from '../../Style';
 import {AdView} from '../../Annonce/AdView';
 import React from 'react';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../Store';
 
 export const AccountAds = ({adState}: {adState: Ad[] | undefined}) => {
+  const isDarkMode = useSelector((state: RootState) => state.info.isDarkMode);
+  const txtColor = TxtColor(isDarkMode);
   return (
     <ScrollView style={tw`px-2 pt-10`}>
       {adState && adState.length > 0 && (
@@ -21,7 +25,7 @@ export const AccountAds = ({adState}: {adState: Ad[] | undefined}) => {
         </View>
       )}
       {adState && adState.length <= 0 && (
-        <Text style={tw.style(Tstyle, `text-center`)}>
+        <Text style={tw.style(Tstyle, txtColor, `text-center`)}>
           Aucune annonce dans cette section. Cliquez sur vendre si vous
           souhaitez créer une annonce
         </Text>

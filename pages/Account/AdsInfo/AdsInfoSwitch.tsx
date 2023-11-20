@@ -10,17 +10,17 @@ export const AdsInfoSwitch = (index: number) => {
     case 0: {
       return <Active />;
     }
+    // case 1: {
+    //   return <Rejected />;
+    // }
     case 1: {
-      return <Rejected />;
-    }
-    case 2: {
       return <Unactive />;
     }
-    case 3: {
+    case 2: {
       return <Deleted />;
     }
-    case 4: {
-      return <PendingPaiement />;
-    }
+    // case 4: {
+    //   return <PendingPaiement />;
+    // }
   }
 };

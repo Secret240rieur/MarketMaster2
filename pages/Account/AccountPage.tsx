@@ -1,6 +1,6 @@
 import {View, Text, Pressable, ScrollView} from 'react-native';
 import tw from 'twrnc';
-import {Hstyle} from '../Style';
+import {Hstyle, IcnColor, TxtColor} from '../Style';
 import {Tstyle} from '../Style';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
@@ -13,9 +13,10 @@ import React from 'react';
 import {
   UserCircleIcon,
   MapPinIcon,
-  CogIcon,
   Cog6ToothIcon,
 } from 'react-native-heroicons/outline';
+import {AdsState} from './AdsState';
+import {GlobalScreenContainer} from '../GlobalScreenContainer';
 
 export const AccountPage = () => {
   const navigation = useNavigation<any>();
@@ -26,6 +27,16 @@ export const AccountPage = () => {
   const [index, setIndex] = useState<number>(0);
   const uid = useSelector((state: RootState) => state.info.uid);
   const dispatch = useDispatch();
+  const isDarkMode = useSelector((state: RootState) => state.info.isDarkMode);
+  const txtColor = TxtColor(isDarkMode);
+  const icnColor = IcnColor(isDarkMode);
+  const adsStates = [
+    {name: 'Actives', ads: activeAds},
+    // {name: 'Rejected'},
+    {name: 'Desactivées', ads: disabledAds},
+    {name: 'Supprimées', ads: deletedAds},
+    // {name: 'Paiement en attente'},
+  ];
 
   useEffect(() => {
     const loadActiveAds = async () => {
@@ -90,57 +101,47 @@ export const AccountPage = () => {
   }, [index]);
 
   return (
-    <View style={tw`flex-1 bg-slate-200`}>
+    <GlobalScreenContainer>
       <View
-        style={tw`flex flex-col gap-7 h-55 w-full px-4 bg-slate-200 pt-15 `}>
-        <View style={tw`flex flex-row justify-between items-center`}>
-          <Text>
-            <UserCircleIcon color="white" size={80} />
-          </Text>
+        style={tw.style(
+          `flex-1 `,
+          // , bgColor
+        )}>
+        <View style={tw.style(`flex flex-col gap-7 h-55 w-full px-4 pt-15 `)}>
+          <View style={tw`flex flex-row justify-between items-center`}>
+            <Text>
+              <UserCircleIcon color="white" size={80} />
+            </Text>
 
-          <View style={tw`flex flex-col gap-2`}>
-            <Text style={tw.style(Hstyle)}>{user?.name}</Text>
-            <View style={tw`flex flex-row gap-2`}>
-              <MapPinIcon size={24} color="#9ca3af" />
-              <Text style={tw.style(Tstyle)}>{user?.city}</Text>
+            <View style={tw`flex flex-col gap-2`}>
+              <Text style={tw.style(Hstyle, txtColor)}>{user?.name}</Text>
+              <View style={tw`flex flex-row gap-2`}>
+                <MapPinIcon size={24} color="#9ca3af" />
+                <Text style={tw.style(Tstyle, txtColor)}>{user?.city}</Text>
+              </View>
             </View>
+            <Pressable
+              style={tw`p-1 border bg-white rounded-full`}
+              onPress={() => navigation.navigate('AccountSettings')}>
+              <Cog6ToothIcon size={37} color="black" />
+            </Pressable>
           </View>
-          <Pressable
-            style={tw`p-1 border bg-white rounded-full`}
-            onPress={() => navigation.navigate('AccountSettings')}>
-            <Cog6ToothIcon size={37} color="black" />
-          </Pressable>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={tw`flex flex-row gap-4 items-center h-10`}>
+              {adsStates.map((value, i) => (
+                <AdsState
+                  key={i}
+                  i={i}
+                  index={index}
+                  setIndex={setIndex}
+                  adsStates={value}
+                />
+              ))}
+            </View>
+          </ScrollView>
         </View>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <View style={tw`flex flex-row gap-4 items-center h-10`}>
-            <Pressable style={tw.style(Pstyle)} onPress={() => setIndex(0)}>
-              <Text style={tw.style(style)}>
-                Actives ({activeAds ? activeAds.length : 0})
-              </Text>
-            </Pressable>
-            <Pressable style={tw.style(Pstyle)} onPress={() => setIndex(1)}>
-              <Text style={tw.style(style)}>Rejected (0)</Text>
-            </Pressable>
-            <Pressable style={tw.style(Pstyle)} onPress={() => setIndex(2)}>
-              <Text style={tw.style(style)}>
-                Desactivées ({disabledAds ? disabledAds.length : 0})
-              </Text>
-            </Pressable>
-            <Pressable style={tw.style(Pstyle)} onPress={() => setIndex(3)}>
-              <Text style={tw.style(style)}>
-                Supprimées ({deletedAds ? deletedAds.length : 0})
-              </Text>
-            </Pressable>
-            <Pressable style={tw.style(Pstyle)} onPress={() => setIndex(4)}>
-              <Text style={tw.style(style)}>Paiement en attente (0)</Text>
-            </Pressable>
-          </View>
-        </ScrollView>
+        {AdsInfoSwitch(index)}
       </View>
-      {AdsInfoSwitch(index)}
-    </View>
+    </GlobalScreenContainer>
   );
 };
-
-const style = `text-xl font-bold text-white`;
-const Pstyle = `bg-blue-600  rounded-3xl items-center justify-center px-4 h-10`;

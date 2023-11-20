@@ -11,6 +11,7 @@ export interface InfoState {
   activeAds: Ad[] | undefined;
   disabledAds: Ad[] | undefined;
   deletedAds: Ad[] | undefined;
+  isDarkMode: boolean;
 }
 
 const initialState: InfoState = {
@@ -24,12 +25,16 @@ const initialState: InfoState = {
   activeAds: undefined,
   disabledAds: undefined,
   deletedAds: undefined,
+  isDarkMode: true,
 };
 
 export const InfoSlice = createSlice({
   name: 'info',
   initialState,
   reducers: {
+    setIsDarkMode: (state, action: PayloadAction<boolean>) => {
+      state.isDarkMode = action.payload;
+    },
     setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
     },
@@ -74,6 +79,7 @@ export const InfoSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
+  setIsDarkMode,
   setCategory,
   setCategoryFilter,
   setCity,

@@ -67,7 +67,7 @@ export const AdPage = ({route}: any) => {
               <Text style={tw`text-lg w-[60%] font-bold text-zinc-800`}>
                 {ad.title}
               </Text>
-              <Text style={tw`text-lg font-bold text-blue-600 text-right`}>
+              <Text style={tw`text-lg font-bold text-black text-right`}>
                 {ad.price} DH
               </Text>
             </View>

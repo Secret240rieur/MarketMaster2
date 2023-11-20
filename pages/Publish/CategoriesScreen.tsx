@@ -22,6 +22,12 @@ export const CategoriesScreen = () => {
     navigation.goBack();
   };
   return (
-    <List title={'Catégories'} list={categories} onPress={selectCategory} />
+    <List
+      title={'Catégories'}
+      list={categories}
+      onPress={selectCategory}
+      txtColor={route.params?.txtColor}
+      icnColor={route.params.icnColor}
+    />
   );
 };

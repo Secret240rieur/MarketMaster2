@@ -20,6 +20,9 @@ export const PublishPost2 = ({route}: any) => {
   const dispatch = useDispatch();
   const id = route.params.id;
   const navigation = useNavigation<any>();
+  const brdColor = route.params.brdColor;
+  const txtColor = route.params.txtColor;
+  const icnColor = route.params.icnColor;
 
   console.log(id);
 
@@ -75,47 +78,61 @@ export const PublishPost2 = ({route}: any) => {
                 navigation.navigate('PublishPost1');
                 navigation.navigate('Home');
               }}>
-              <XMarkIcon size={30} color="black" />
+              <XMarkIcon size={30} color={icnColor} />
             </Pressable>
             <Text
               style={tw.style(
-                'absolute self-center text-2xl font-bold text-white mb-6',
+                'absolute self-center text-2xl font-bold mb-6',
+                txtColor,
               )}>
               Créer une annonce
             </Text>
           </View>
           <ScrollView style={tw`p-4`}>
-            <Text style={tw.style(Hstyle)}>Titre</Text>
+            <Text style={tw.style(Hstyle, txtColor)}>Titre</Text>
             <TextInput
               onChangeText={handleChange('title')}
               onBlur={handleBlur('title')}
               value={values.title}
-              style={tw`mt-5 border border-slate-300 h-12 rounded p-2`}
+              style={tw.style(
+                `mt-5 border h-12 rounded p-2`,
+                brdColor,
+                txtColor,
+              )}
             />
-            <Text>
+            <Text style={tw.style(txtColor)}>
               <ErrorMessage name={'title'} />
             </Text>
-            <Text style={tw.style(Hstyle)}>Price</Text>
+            <Text style={tw.style(Hstyle, txtColor)}>Price</Text>
             <TextInput
               onChangeText={handleChange('price')}
               onBlur={handleBlur('price')}
               value={values.price.toString()}
-              style={tw`mt-5 border border-slate-300 h-12 rounded p-2`}
+              style={tw.style(
+                `mt-5 border h-12 rounded p-2`,
+                brdColor,
+                txtColor,
+              )}
             />
-            <Text>
+            <Text style={tw.style(txtColor)}>
               <ErrorMessage name={'price'} />
             </Text>
-            <Text style={tw.style(Hstyle)}>Description</Text>
+            <Text style={tw.style(Hstyle, txtColor)}>Description</Text>
             <TextInput
               onChangeText={handleChange('description')}
               onBlur={handleBlur('description')}
               value={values.description}
               multiline
-              style={tw.style(`mt-5 border border-slate-300 h-52 rounded p-2`, {
-                textAlignVertical: 'top',
-              })}
+              style={tw.style(
+                `mt-5 border h-52 rounded p-2`,
+                brdColor,
+                txtColor,
+                {
+                  textAlignVertical: 'top',
+                },
+              )}
             />
-            <Text>
+            <Text style={tw.style(txtColor)}>
               <ErrorMessage name={'description'} />
             </Text>
           </ScrollView>

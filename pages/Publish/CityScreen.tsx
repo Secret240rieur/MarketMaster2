@@ -15,5 +15,13 @@ export const CityScreen = ({route}: any) => {
     navigation.goBack();
   };
 
-  return <List title={'Ville'} list={cities} onPress={selectCity} />;
+  return (
+    <List
+      title={'Ville'}
+      list={cities}
+      onPress={selectCity}
+      txtColor={route.params?.txtColor}
+      icnColor={route.params.icnColor}
+    />
+  );
 };

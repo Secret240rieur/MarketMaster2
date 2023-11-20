@@ -13,8 +13,14 @@ import {FunnelIcon, MapPinIcon} from 'react-native-heroicons/outline';
 export const FilterBottomSheet = ({
   open,
   onClose,
+  icnColor,
+  txtColor,
+  bgNumColor,
 }: {
   open: boolean;
+  icnColor: string;
+  txtColor: string;
+  bgNumColor: string;
   onClose: () => void;
 }) => {
   const category = useSelector((state: RootState) => state.info.categoryFilter);
@@ -40,11 +46,15 @@ export const FilterBottomSheet = ({
       snapPoints={snapPoints}
       enablePanDownToClose
       onChange={handleSheetChanges}
-      backgroundStyle={{backgroundColor: '#27272a'}}
-      handleIndicatorStyle={{backgroundColor: '#27272a'}}>
-      <View style={tw`bg-zinc-800 flex-1 px-5`}>
+      backgroundStyle={{backgroundColor: bgNumColor}}
+      handleIndicatorStyle={{backgroundColor: bgNumColor}}>
+      <View style={tw.style(` flex-1 px-5`)}>
         <View style={tw`h-10 relative mb-5`}>
-          <Text style={tw`absolute self-center text-2xl font-bold text-white`}>
+          <Text
+            style={tw.style(
+              `absolute self-center text-2xl font-bold `,
+              txtColor,
+            )}>
             Filter
           </Text>
           <Pressable
@@ -61,10 +71,14 @@ export const FilterBottomSheet = ({
               name: 'Categories',
               params: {
                 isFilter: true,
+                txtColor,
+                icnColor,
               },
             })
           }
-          icon={<FunnelIcon size={30} color="white" />}
+          icon={<FunnelIcon size={30} color={icnColor} />}
+          icnColor={icnColor}
+          txtColor={txtColor}
         />
         <Selectable
           title={'Ville'}
@@ -74,17 +88,14 @@ export const FilterBottomSheet = ({
               name: 'Cities',
               params: {
                 isFilter: true,
+                txtColor,
+                icnColor,
               },
             })
           }
-          icon={
-            <MapPinIcon
-              //   <MaterialCommunityIcons
-              //     name="flag-outline"
-              size={30}
-              color="white"
-            />
-          }
+          icon={<MapPinIcon size={30} color={icnColor} />}
+          icnColor={icnColor}
+          txtColor={txtColor}
         />
       </View>
     </BottomSheet>

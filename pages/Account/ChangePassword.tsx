@@ -15,10 +15,32 @@ import {ProfilInput} from './ProfilInput';
 import {ContinueButton} from '../Annonce/ContinueButton';
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
+import {GlobalScreenContainer} from '../GlobalScreenContainer';
 
-export const ChangePassword = () => {
+export const ChangePassword = ({route}: any) => {
   const user = auth().currentUser;
   const navigation = useNavigation<any>();
+  const isDarkMode = route.params.isDarkMode;
+  const txtColor = route.params.txtColor;
+
+  const pwInputs = [
+    {
+      autoFocus: true,
+      name: 'oldPassword',
+      title: 'Ancien mot de passe',
+      placeholder: 'Old password',
+    },
+    {
+      name: 'password',
+      title: 'Nouveau mot de passe',
+      placeholder: 'New password',
+    },
+    {
+      name: 'passconf',
+      title: 'Confirmez mot de passe',
+      placeholder: 'Confirm password',
+    },
+  ];
   const validationSchema = Yup.object().shape({
     oldPassword: Yup.string().required('old password is required'),
     password: Yup.string()
@@ -54,87 +76,71 @@ export const ChangePassword = () => {
     }
   };
   return (
-    <View style={tw.style(BodyStyle, `px-4`)}>
-      {user && (
-        <Formik
-          initialValues={{
-            oldPassword: '',
-            password: '',
-            passconf: '',
-          }}
-          onSubmit={value => {
-            resetUserPassword({
-              oldPassword: value.oldPassword,
-              newPassword: value.password,
-            });
-            navigation.navigate('ProfilPage');
-          }}
-          validationSchema={validationSchema}>
-          {({handleSubmit, isValid, handleChange, values}) => (
-            <View style={tw`flex-1`}>
-              <Text style={tw`text-2xl font-bold text-white self-center mb-10`}>
-                Modifier mon profile
-              </Text>
-              <ScrollView>
-                <KeyboardAvoidingView
-                  behavior="position"
-                  keyboardVerticalOffset={Platform.OS === 'ios' ? -200 : -500}>
-                  <View style={tw.style(`gap-10 mt-25 mb-10`)}>
-                    <ProfilInput
-                      autoFocus={true}
-                      onChangeText={handleChange('oldPassword')}
-                      title={'Ancien mot de passe'}
-                      value={values.oldPassword}
-                      placeholder={'Old password'}
-                      errorMessage={<ErrorMessage name={'oldPassword'} />}
-                      // icon={
-                      //   <MaterialCommunityIcons
-                      //     name="form-textbox-password"
-                      //     size={30}
-                      //     color="#3f3f46"
-                      //   />
-                      // }
-                    />
-                    <ProfilInput
-                      onChangeText={handleChange('password')}
-                      title={'Nouveau mot de passe'}
-                      value={values.password}
-                      placeholder={'New password'}
-                      errorMessage={<ErrorMessage name={'password'} />}
-                      // icon={
-                      //   <MaterialCommunityIcons
-                      //     name="form-textbox-password"
-                      //     size={30}
-                      //     color="#3f3f46"
-                      //   />
-                      // }
-                    />
-                    <ProfilInput
-                      onChangeText={handleChange('passconf')}
-                      title={'Confirmez mot de passe'}
-                      value={values.passconf}
-                      placeholder={'Confirm password'}
-                      errorMessage={<ErrorMessage name={'passconf'} />}
-                      // icon={
-                      //   <MaterialCommunityIcons
-                      //     name="form-textbox-password"
-                      //     size={30}
-                      //     color="#3f3f46"
-                      //   />
-                      // }
-                    />
-                  </View>
-                </KeyboardAvoidingView>
-              </ScrollView>
-              <ContinueButton
-                handleSubmit={handleSubmit}
-                isValid={isValid}
-                text={'Continue'}
-              />
-            </View>
-          )}
-        </Formik>
-      )}
-    </View>
+    <GlobalScreenContainer>
+      <View style={tw.style(BodyStyle, `px-4`)}>
+        {user && (
+          <Formik
+            initialValues={{
+              oldPassword: '',
+              password: '',
+              passconf: '',
+            }}
+            onSubmit={value => {
+              resetUserPassword({
+                oldPassword: value.oldPassword,
+                newPassword: value.password,
+              });
+              navigation.navigate('ProfilPage');
+            }}
+            validationSchema={validationSchema}>
+            {({handleSubmit, isValid, handleChange, values}) => (
+              <View style={tw.style(`flex-1`)}>
+                <Text
+                  style={tw.style(
+                    txtColor,
+                    `text-2xl font-bold self-center mb-10`,
+                  )}>
+                  Modifier mon profile
+                </Text>
+                <ScrollView>
+                  <KeyboardAvoidingView
+                    behavior="position"
+                    keyboardVerticalOffset={
+                      Platform.OS === 'ios' ? -200 : -500
+                    }>
+                    <View style={tw.style(`gap-10 mt-25 mb-10`)}>
+                      {pwInputs.map((value, i) => (
+                        <ProfilInput
+                          key={i}
+                          autoFocus={value.autoFocus}
+                          onChangeText={handleChange(value.name)}
+                          title={value.title}
+                          value={
+                            i === 0
+                              ? values.oldPassword
+                              : i === 1
+                              ? values.password
+                              : values.passconf
+                          }
+                          placeholder={value.placeholder}
+                          errorMessage={<ErrorMessage name={value.name} />}
+                          txtColor={txtColor}
+                          isDarkMode={isDarkMode}
+                        />
+                      ))}
+                    </View>
+                  </KeyboardAvoidingView>
+                </ScrollView>
+                <ContinueButton
+                  handleSubmit={handleSubmit}
+                  isValid={isValid}
+                  text={'Continue'}
+                />
+              </View>
+            )}
+          </Formik>
+        )}
+      </View>
+    </GlobalScreenContainer>
   );
 };

@@ -26,18 +26,6 @@ export const App = () => {
     <GestureHandlerRootView style={{flex: 1}}>
       <Provider store={store}>
         <NavigationContainer>
-          {/* <Pressable
-            onPress={() => {
-              setOpen(true);
-            }}>
-            <Text>hi</Text>
-          </Pressable>
-          <FilterBottomSheet
-            open={open}
-            onClose={() => {
-              setOpen(false);
-            }}
-          /> */}
           <NavigationStack />
         </NavigationContainer>
       </Provider>

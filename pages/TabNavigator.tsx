@@ -1,12 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {LoginPage} from './Account/LoginPage';
-import {PublishStack} from './Publish/PublishStack';
-import {AccountPage} from './Account/AccountPage';
 import auth from '@react-native-firebase/auth';
 import {useEffect, useState} from 'react';
-import {ConversationsListPage} from './Chat/ConversationsListPage';
-import {AnnoncesPage} from './Annonce/AnnoncesPage';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setUid} from './InfoSlice';
 import {getValueFor} from '../SecureStore';
 import {Signin} from './Account/Signin';
@@ -25,6 +20,8 @@ import {
   ChatBubbleLeftRightIcon as ChatBubbleLeftRightIconSolid,
   UserIcon as UserIconSolid,
 } from 'react-native-heroicons/solid';
+import {RootState} from './Store';
+import {ScreenList} from './ScreenList';
 
 export const TabNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -33,6 +30,11 @@ export const TabNavigator = () => {
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
   const [secureStore, setSecureStore] = useState(false);
+  const isDarkMode = useSelector((state: RootState) => state.info.isDarkMode);
+
+  const bgColor = isDarkMode ? '#27272a' : '#e2e8f0';
+
+  const screen = ScreenList({connected, bgColor});
 
   useEffect(() => {
     const getCredentials = async () => {
@@ -116,48 +118,16 @@ export const TabNavigator = () => {
         tabBarActiveTintColor: 'gray',
         tabBarInactiveTintColor: 'gray',
         headerShown: false,
+        tabBarStyle: {backgroundColor: bgColor},
       })}>
-      <Tab.Screen
-        name="Home"
-        component={AnnoncesPage}
-        options={{title: 'Home'}}
-      />
-      {/* <Tab.Screen
-        name="Favoris"
-        component={Favoris}
-        options={{ title: "Favoris" }}
-      /> */}
-      {
+      {screen.map((value, i) => (
         <Tab.Screen
-          name="Vendre"
-          component={connected ? PublishStack : LoginPage}
-          options={{
-            title: 'Vendre',
-            tabBarStyle: !connected ? {display: 'none'} : {display: 'flex'},
-          }}
+          key={i}
+          name={value.name}
+          component={value.component}
+          options={value.options}
         />
-      }
-      <Tab.Screen
-        name="Chat"
-        component={connected ? ConversationsListPage : LoginPage}
-        options={{
-          title: 'Chat',
-          tabBarStyle: !connected ? {display: 'none'} : {display: 'flex'},
-        }}
-      />
-      <Tab.Screen
-        name="Compte"
-        component={connected ? AccountPage : LoginPage}
-        options={{
-          title: 'Compte',
-          tabBarStyle: !connected ? {display: 'none'} : {display: 'flex'},
-        }}
-      />
-      {/* <Tab.Screen
-        name="Compte"
-        component={AccountSettings}
-        options={{ title: "Compte" }}
-      /> */}
+      ))}
     </Tab.Navigator>
   );
 };

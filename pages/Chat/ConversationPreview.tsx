@@ -2,7 +2,6 @@ import tw from 'twrnc';
 import {View, Image, Text, Pressable} from 'react-native';
 import moment from 'moment';
 import {useNavigation} from '@react-navigation/native';
-import firestore from '@react-native-firebase/firestore';
 import React from 'react';
 import {ChevronRightIcon} from 'react-native-heroicons/outline';
 
@@ -15,6 +14,8 @@ export const ConversationPreview = ({
   message,
   date,
   aid,
+  txtColor,
+  brdColor,
 }: {
   id: string;
   adUid: string;
@@ -25,6 +26,8 @@ export const ConversationPreview = ({
   title: string;
   message: string;
   aid: string;
+  txtColor: string;
+  brdColor: string;
 }) => {
   const navigator = useNavigation<any>();
 
@@ -41,6 +44,7 @@ export const ConversationPreview = ({
             adUid,
             price,
             aid,
+            txtColor,
           },
         })
       }>
@@ -48,16 +52,16 @@ export const ConversationPreview = ({
         source={{uri: image}}
         style={tw`w-20 h-20 rounded-5 self-center`}
       />
-      <View style={tw`flex-1 gap-0`}>
-        <Text numberOfLines={1} style={tw`text-black font-bold text-xl`}>
+      <View style={tw.style(`flex-1 gap-0 border-b `, brdColor)}>
+        <Text numberOfLines={1} style={tw.style(txtColor, `font-bold text-xl`)}>
           {title.toUpperCase()}
         </Text>
-        <Text style={tw`text-black text-lg`}>{price} DH</Text>
+        <Text style={tw.style(txtColor, ` text-lg`)}>{price} DH</Text>
         <View style={tw` flex flex-row justify-between`}>
-          <Text numberOfLines={1} style={tw`text-gray-400 text-sm`}>
+          <Text numberOfLines={1} style={tw`text-gray-500 text-sm`}>
             {message}
           </Text>
-          <Text style={tw`text-black text-lg`}>
+          <Text style={tw.style(txtColor, `text-lg`)}>
             {moment(date.toDate()).format('LT')}
           </Text>
         </View>

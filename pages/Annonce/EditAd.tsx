@@ -167,9 +167,8 @@ export const EditAd = ({route}: any) => {
               <View style={tw`flex flex-row justify-between mb-10`}>
                 <Text style={tw.style(Hstyle)}>Statut</Text>
                 <Switch
-                  trackColor={{false: '#767577', true: '#2563eb'}}
-                  // thumbColor={isActive ? "#f5dd4b" : "#f4f3f4"}
-                  // ios_backgroundColor="#3e3e3e"
+                  trackColor={{false: '#767577', true: 'black'}}
+                  // thumbColor={isActive ? 'black' : 'black'}
                   onValueChange={value => {
                     setFieldValue('isActive', value);
                   }}

@@ -23,6 +23,7 @@ import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import uuid from 'react-native-uuid';
 import {CameraIcon} from 'react-native-heroicons/outline';
+import {GlobalScreenContainer} from '../GlobalScreenContainer';
 
 export const ChatPage = ({route}: any) => {
   const [uploading, setUploading] = useState(false);
@@ -34,7 +35,7 @@ export const ChatPage = ({route}: any) => {
   const uid = useSelector((state: RootState) => state.info.uid);
   const [data, setData] = useState<Message[]>([]);
   const [msgId, setMsgId] = useState<string>('');
-
+  const txtColor = route.params.txtColor;
   useEffect(() => {
     (async () => {
       const UUID = uuid.v4();
@@ -201,63 +202,67 @@ export const ChatPage = ({route}: any) => {
   }, [refreshing]);
 
   return (
-    <SafeAreaView style={tw`flex-1 bg-slate-200 justify-between`}>
-      <Pressable
-        style={tw`flex flex-row p-4 gap-2`}
-        onPress={() =>
-          navigator.navigate({
-            name: 'AdPage',
-            params: {
-              id: route.params.aid,
-            },
-          })
-        }>
-        <Image
-          source={{uri: route.params.image}}
-          style={tw`w-20 h-20 rounded-5`}
-        />
-        <Text style={tw.style(Hstyle, `w-3/4`)}>{route.params.title}</Text>
-      </Pressable>
-      <View style={tw`h-3/4 bg-slate-200 px-4`}>
-        <FlatList
-          data={data}
-          renderItem={({item, index}) => (
-            <Message
-              text={item.message}
-              date={item.date}
-              index={index}
-              data={data}
-              uid={uid}
-            />
-          )}
-          keyExtractor={item => item.msgId}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
-        />
-      </View>
-      <KeyboardAvoidingView
-        behavior="position"
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200}>
-        <View
-          style={tw`flex-row justify-between px-4 h-15 border-t-2 border-[#3f3f46] bg-black`}>
-          <Pressable style={tw` justify-center`} onPress={pickImage}>
-            <CameraIcon size={24} color="grey" />
-          </Pressable>
-          <TextInput
-            multiline
-            ref={messageInputRef}
-            style={tw`w-3/4 text-xl text-[#d1d5db] py-3 `}
-            onChangeText={setMessage}
-            placeholder="Aa"
-            placeholderTextColor={'#d1d5db'}
-            value={message}
+    <GlobalScreenContainer>
+      <SafeAreaView style={tw.style(`flex-1 justify-between`)}>
+        <Pressable
+          style={tw`flex flex-row p-4 gap-2`}
+          onPress={() =>
+            navigator.navigate({
+              name: 'AdPage',
+              params: {
+                id: route.params.aid,
+              },
+            })
+          }>
+          <Image
+            source={{uri: route.params.image}}
+            style={tw`w-20 h-20 rounded-5`}
           />
-          <Pressable style={tw` justify-center`} onPress={sendMessage}>
-            <Text style={tw`text-gray-300 font-bold`}>Send</Text>
-          </Pressable>
+          <Text style={tw.style(Hstyle, txtColor, `w-3/4`)}>
+            {route.params.title}
+          </Text>
+        </Pressable>
+        <View style={tw.style(`h-3/4 px-4`)}>
+          <FlatList
+            data={data}
+            renderItem={({item, index}) => (
+              <Message
+                text={item.message}
+                date={item.date}
+                index={index}
+                data={data}
+                uid={uid}
+              />
+            )}
+            keyExtractor={item => item.msgId}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+          />
         </View>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+        <KeyboardAvoidingView
+          behavior="position"
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200}>
+          <View
+            style={tw`flex-row justify-between px-4 h-15 border-t-2 border-[#3f3f46] bg-black`}>
+            <Pressable style={tw` justify-center`} onPress={pickImage}>
+              <CameraIcon size={24} color="grey" />
+            </Pressable>
+            <TextInput
+              multiline
+              ref={messageInputRef}
+              style={tw`w-3/4 text-xl text-[#d1d5db] py-3 `}
+              onChangeText={setMessage}
+              placeholder="Aa"
+              placeholderTextColor={'#d1d5db'}
+              value={message}
+            />
+            <Pressable style={tw` justify-center`} onPress={sendMessage}>
+              <Text style={tw`text-gray-300 font-bold`}>Send</Text>
+            </Pressable>
+          </View>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </GlobalScreenContainer>
   );
 };

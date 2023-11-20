@@ -14,6 +14,8 @@ type Props = {
   keyboardType?: KeyboardTypeOptions;
   errorMessage?: any;
   autoFocus?: boolean;
+  txtColor: string;
+  isDarkMode: boolean;
 };
 
 export const ProfilInput = ({
@@ -27,19 +29,26 @@ export const ProfilInput = ({
   icon2,
   keyboardType,
   errorMessage,
+  txtColor,
+  isDarkMode,
 }: Props) => {
+  const emailBg = !editable
+    ? isDarkMode
+      ? 'bg-zinc-700'
+      : 'bg-slate-300'
+    : null;
   return (
     <View style={tw`gap-2`}>
-      <Text style={tw.style(Hstyle)}>{title}</Text>
+      <Text style={tw.style(Hstyle, txtColor)}>{title}</Text>
       <View
         style={tw.style(
           `flex flex-row items-center border border-slate-300 rounded p-2 gap-2`,
-          {'bg-slate-300': !editable},
+          emailBg,
         )}>
         {icon}
         <TextInput
           autoFocus={autoFocus}
-          style={tw.style(`text-lg text-black pb-2 w-full`, {
+          style={tw.style(`text-lg pb-2 w-full`, txtColor, {
             'text-gray-400': !editable,
           })}
           placeholder={placeholder}
