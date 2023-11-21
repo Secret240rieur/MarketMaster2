@@ -16,6 +16,7 @@ export const ConversationPreview = ({
   aid,
   txtColor,
   brdColor,
+  icnColor,
 }: {
   id: string;
   adUid: string;
@@ -28,6 +29,7 @@ export const ConversationPreview = ({
   aid: string;
   txtColor: string;
   brdColor: string;
+  icnColor: string;
 }) => {
   const navigator = useNavigation<any>();
 
@@ -45,6 +47,7 @@ export const ConversationPreview = ({
             price,
             aid,
             txtColor,
+            icnColor,
           },
         })
       }>

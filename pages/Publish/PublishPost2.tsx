@@ -10,6 +10,7 @@ import {reset} from '../InfoSlice';
 import firestore from '@react-native-firebase/firestore';
 import React from 'react';
 import {XMarkIcon} from 'react-native-heroicons/outline';
+import {GlobalScreenContainer} from '../GlobalScreenContainer';
 
 export const PublishPost2 = ({route}: any) => {
   const category = useSelector((state: RootState) => state.info.category);
@@ -69,93 +70,95 @@ export const PublishPost2 = ({route}: any) => {
       }}
       validationSchema={validationSchema}>
       {({handleSubmit, isValid, handleChange, handleBlur, values, touched}) => (
-        <View style={tw.style(BodyStyle)}>
-          <View style={tw`h-10 relative`}>
-            <Pressable
-              style={tw`absolute left-4`}
-              onPress={() => {
-                dispatch(reset());
-                navigation.navigate('PublishPost1');
-                navigation.navigate('Home');
-              }}>
-              <XMarkIcon size={30} color={icnColor} />
-            </Pressable>
-            <Text
-              style={tw.style(
-                'absolute self-center text-2xl font-bold mb-6',
-                txtColor,
-              )}>
-              Créer une annonce
-            </Text>
-          </View>
-          <ScrollView style={tw`p-4`}>
-            <Text style={tw.style(Hstyle, txtColor)}>Titre</Text>
-            <TextInput
-              onChangeText={handleChange('title')}
-              onBlur={handleBlur('title')}
-              value={values.title}
-              style={tw.style(
-                `mt-5 border h-12 rounded p-2`,
-                brdColor,
-                txtColor,
-              )}
-            />
-            <Text style={tw.style(txtColor)}>
-              <ErrorMessage name={'title'} />
-            </Text>
-            <Text style={tw.style(Hstyle, txtColor)}>Price</Text>
-            <TextInput
-              onChangeText={handleChange('price')}
-              onBlur={handleBlur('price')}
-              value={values.price.toString()}
-              style={tw.style(
-                `mt-5 border h-12 rounded p-2`,
-                brdColor,
-                txtColor,
-              )}
-            />
-            <Text style={tw.style(txtColor)}>
-              <ErrorMessage name={'price'} />
-            </Text>
-            <Text style={tw.style(Hstyle, txtColor)}>Description</Text>
-            <TextInput
-              onChangeText={handleChange('description')}
-              onBlur={handleBlur('description')}
-              value={values.description}
-              multiline
-              style={tw.style(
-                `mt-5 border h-52 rounded p-2`,
-                brdColor,
-                txtColor,
-                {
-                  textAlignVertical: 'top',
-                },
-              )}
-            />
-            <Text style={tw.style(txtColor)}>
-              <ErrorMessage name={'description'} />
-            </Text>
-          </ScrollView>
-
-          <View style={tw`flex justify-center pt-4`}>
-            <Pressable
-              onPress={() => handleSubmit()}
-              style={tw.style(
-                `flex border rounded-lg w-[80%] h-12 self-center justify-center bg-zinc-400`,
-                {
-                  'bg-blue-600':
-                    touched.title === true &&
-                    touched.description === true &&
-                    touched.price === true &&
-                    isValid,
-                },
-              )}>
-              <Text style={tw`flex mx-auto text-xl font-bold text-white`}>
-                Continuer
+        <GlobalScreenContainer>
+          <View style={tw.style(BodyStyle)}>
+            <View style={tw`h-10 relative`}>
+              <Pressable
+                style={tw`absolute left-4`}
+                onPress={() => {
+                  dispatch(reset());
+                  navigation.navigate('PublishPost1');
+                  navigation.navigate('Home');
+                }}>
+                <XMarkIcon size={30} color={icnColor} />
+              </Pressable>
+              <Text
+                style={tw.style(
+                  'absolute self-center text-2xl font-bold mb-6',
+                  txtColor,
+                )}>
+                Créer une annonce
               </Text>
-            </Pressable>
+            </View>
+            <ScrollView style={tw`p-4`}>
+              <Text style={tw.style(Hstyle, txtColor)}>Titre</Text>
+              <TextInput
+                onChangeText={handleChange('title')}
+                onBlur={handleBlur('title')}
+                value={values.title}
+                style={tw.style(
+                  `mt-5 border h-12 rounded p-2`,
+                  brdColor,
+                  txtColor,
+                )}
+              />
+              <Text style={tw.style(txtColor)}>
+                <ErrorMessage name={'title'} />
+              </Text>
+              <Text style={tw.style(Hstyle, txtColor)}>Price</Text>
+              <TextInput
+                onChangeText={handleChange('price')}
+                onBlur={handleBlur('price')}
+                value={values.price.toString()}
+                style={tw.style(
+                  `mt-5 border h-12 rounded p-2`,
+                  brdColor,
+                  txtColor,
+                )}
+              />
+              <Text style={tw.style(txtColor)}>
+                <ErrorMessage name={'price'} />
+              </Text>
+              <Text style={tw.style(Hstyle, txtColor)}>Description</Text>
+              <TextInput
+                onChangeText={handleChange('description')}
+                onBlur={handleBlur('description')}
+                value={values.description}
+                multiline
+                style={tw.style(
+                  `mt-5 border h-52 rounded p-2`,
+                  brdColor,
+                  txtColor,
+                  {
+                    textAlignVertical: 'top',
+                  },
+                )}
+              />
+              <Text style={tw.style(txtColor)}>
+                <ErrorMessage name={'description'} />
+              </Text>
+            </ScrollView>
+
+            <View style={tw`flex justify-center pt-4`}>
+              <Pressable
+                onPress={() => handleSubmit()}
+                style={tw.style(
+                  `flex border rounded-lg w-[80%] h-12 self-center justify-center bg-zinc-400`,
+                  {
+                    'bg-blue-600':
+                      touched.title === true &&
+                      touched.description === true &&
+                      touched.price === true &&
+                      isValid,
+                  },
+                )}>
+                <Text style={tw`flex mx-auto text-xl font-bold text-white`}>
+                  Continuer
+                </Text>
+              </Pressable>
+            </View>
           </View>
-        </View>
+        </GlobalScreenContainer>
       )}
     </Formik>
   );

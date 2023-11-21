@@ -4,7 +4,7 @@ import tw from 'twrnc';
 import React from 'react';
 import {ChatBubbleLeftEllipsisIcon} from 'react-native-heroicons/outline';
 
-export const ChatButton = ({ad}: {ad: Ad}) => {
+export const ChatButton = ({ad, txtColor}: {ad: Ad; txtColor: string}) => {
   const navigator = useNavigation<any>();
   return (
     <Pressable
@@ -18,6 +18,7 @@ export const ChatButton = ({ad}: {ad: Ad}) => {
             title: ad.title,
             adUid: ad.uid,
             price: ad.price,
+            txtColor,
           },
         })
       }>

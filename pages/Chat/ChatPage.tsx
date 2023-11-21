@@ -36,6 +36,7 @@ export const ChatPage = ({route}: any) => {
   const [data, setData] = useState<Message[]>([]);
   const [msgId, setMsgId] = useState<string>('');
   const txtColor = route.params.txtColor;
+  const icnColor = route.params.icnColor;
   useEffect(() => {
     (async () => {
       const UUID = uuid.v4();
@@ -211,6 +212,8 @@ export const ChatPage = ({route}: any) => {
               name: 'AdPage',
               params: {
                 id: route.params.aid,
+                txtColor,
+                icnColor,
               },
             })
           }>

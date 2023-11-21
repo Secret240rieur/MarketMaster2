@@ -25,7 +25,16 @@ export const AdView = ({fullWidth = false, image, title, price, id}: Props) => {
       style={tw.style('flex flex-col w-[48%] rounded  ', {
         'w-full': fullWidth,
       })}
-      onPress={() => navigation.navigate({name: 'AdPage', params: {id: id}})}>
+      onPress={() =>
+        navigation.navigate({
+          name: 'AdPage',
+          params: {
+            id,
+            txtColor,
+            icnColor,
+          },
+        })
+      }>
       <Image
         source={{uri: image}}
         style={tw.style('w-full h-48 rounded-t-2xl')}

@@ -25,7 +25,7 @@ const initialState: InfoState = {
   activeAds: undefined,
   disabledAds: undefined,
   deletedAds: undefined,
-  isDarkMode: true,
+  isDarkMode: false,
 };
 
 export const InfoSlice = createSlice({

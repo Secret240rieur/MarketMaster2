@@ -10,13 +10,43 @@ import {
 } from 'react-native-heroicons/outline';
 
 type Props = {
-  icnColor: string;
-  txtColor: string;
-  user: User;
-  isDarkMode: boolean;
+  icnColor?: string;
+  txtColor?: string;
+  user?: User;
+  isDarkMode?: boolean;
 };
 
 export const ProfilClass = ({icnColor, txtColor, user, isDarkMode}: Props) => {
+  const profilCreate = [
+    {
+      name: 'name',
+      placeholder: 'Full name',
+    },
+    {
+      name: 'email',
+      placeholder: 'Email',
+      keyboardType: 'email-address' as KeyboardTypeOptions,
+    },
+    {
+      name: 'emailconf',
+      placeholder: 'Confirm email',
+      keyboardType: 'email-address' as KeyboardTypeOptions,
+    },
+    {
+      name: 'password',
+      placeholder: 'Password',
+    },
+    {
+      name: 'passconf',
+      placeholder: 'Confirm password',
+    },
+    {
+      name: 'phone',
+      placeholder: 'Phone number',
+      KeyboardType: 'numeric' as KeyboardTypeOptions,
+    },
+  ];
+
   const profilInfo = [
     {
       name: 'name',
@@ -67,5 +97,5 @@ export const ProfilClass = ({icnColor, txtColor, user, isDarkMode}: Props) => {
     },
   ];
 
-  return {profilInfo, selectableInfo};
+  return {profilInfo, selectableInfo, profilCreate};
 };

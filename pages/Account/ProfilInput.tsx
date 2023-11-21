@@ -52,14 +52,14 @@ export const ProfilInput = ({
             'text-gray-400': !editable,
           })}
           placeholder={placeholder}
-          placeholderTextColor={'#3f3f46'}
+          placeholderTextColor={'#94a3b8'}
           value={value}
           onChangeText={onChangeText}
           editable={editable}
           keyboardType={keyboardType}></TextInput>
         <View style={tw`absolute  right-2`}>{icon2}</View>
       </View>
-      <Text>{errorMessage}</Text>
+      <Text style={tw.style(txtColor)}>{errorMessage}</Text>
     </View>
   );
 };
